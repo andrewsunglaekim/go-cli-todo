@@ -24,6 +24,7 @@ func printMenu(){
   fmt.Println("2) Create a Todo")
   fmt.Println("3) Edit a Todo")
   fmt.Println("4) Toggle a Todo(Complete/Not Complete)")
+  fmt.Println("5) Delete a Todo")
 }
 
 func clearScreen(){
@@ -33,4 +34,10 @@ func clearScreen(){
 func advanceWithEnter() {
   getInput("\nPress enter to continue.")
   clearScreen()
+}
+
+func displayTodosWithBuffer() {
+  makeBuffer()
+  displayAllTodos()
+  makeBuffer()
 }

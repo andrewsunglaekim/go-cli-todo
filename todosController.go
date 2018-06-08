@@ -14,8 +14,25 @@ func createTodo(todoBody string) {
 }
 
 func editTodo(todoID uint64, todoBody string) {
-  todo := Todo{}
-  db.DB.First(&todo, todoID)
+  todo := findTodo(todoID)
   todo.Body = todoBody
   db.DB.Save(&todo)
+}
+
+func toggleTodo(todoID uint64) Todo{
+  todo := findTodo(todoID)
+  todo.Completed = !todo.Completed
+  db.DB.Save(&todo)
+  return todo
+}
+
+func deleteTodo(todoID uint64) {
+  todo := findTodo(todoID)
+  db.DB.Delete(&todo)
+}
+
+func findTodo(todoID uint64) Todo{
+  todo := Todo{}
+  db.DB.First(&todo, todoID)
+  return todo
 }

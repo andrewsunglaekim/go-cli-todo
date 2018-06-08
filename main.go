@@ -34,6 +34,9 @@ func main() {
     case "4":
       toggleCompletedEvents()
       advanceWithEnter()
+    case "5":
+      deleteTodoEvents()
+      advanceWithEnter()
     case "q":
       fmt.Println("Thanks for using! Goodbye!")
     default:

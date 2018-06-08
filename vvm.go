@@ -26,10 +26,7 @@ func createTodoEvents() {
 }
 
 func editTodoEvents() {
-  // todoEdit := Todo{}
-  makeBuffer()
-  displayAllTodos()
-  makeBuffer()
+  displayTodosWithBuffer()
   todoIDString := getInput("Type the number of the todo you would like to edit")
   todoID, err := strconv.ParseUint(todoIDString, 10, 32)
   if err !=nil{
@@ -38,16 +35,30 @@ func editTodoEvents() {
   editText := getInput("Type the new text for your todo: ")
   editTodo(todoID, editText)
   fmt.Println("Todo has been edited!")
-  // todoIndexPlus1
 }
 
-func toggleCompletedEvents() {
-  makeBuffer()
-  displayAllTodos()
-  makeBuffer()
-  todoIDString := getInput("Type the number of the todo you would like to edit")
+func toggleCompletedEvents(){
+  displayTodosWithBuffer()
+  todoIDString := getInput("Type the number of the todo you would like to toggle(Complete/Not Complete)")
   todoID, err := strconv.ParseUint(todoIDString, 10, 32)
   if err !=nil{
     fmt.Println(err)
   }
+  todo := toggleTodo(todoID)
+  completedStatus := "Complete!"
+  if todo.Completed {
+    completedStatus = "Not Complete."
+  }
+  fmt.Println(todo.Body, "is now", completedStatus)
+}
+
+func deleteTodoEvents(){
+  displayTodosWithBuffer()
+  todoIDString := getInput("Type the number of the todo you would like to delete")
+  todoID, err := strconv.ParseUint(todoIDString, 10, 32)
+  if err !=nil{
+    fmt.Println(err)
+  }
+  deleteTodo(todoID)
+  fmt.Println("Todo deleted!")
 }
